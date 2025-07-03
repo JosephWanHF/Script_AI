@@ -1,0 +1,121 @@
+{
+    "lines": [
+        {
+            "id": 1,
+            "sequence": "0",
+            "character": "DIRECTOR",
+            "action": "",
+            "dialog": "What the hell am I looking at?!",
+            "emotion": "frustrated",
+            "cue": "at"
+        },
+        {
+            "id": 2,
+            "sequence": "0",
+            "character": "PRODUCER",
+            "action": "",
+            "dialog": "Is it fake?! Is it AI?!",
+            "emotion": "confused",
+            "cue": "ai"
+        },
+        {
+            "id": 3,
+            "sequence": "1",
+            "character": "TECHNICIAN",
+            "action": "",
+            "dialog": "Discriminator says no! These are ground truth pixels!",
+            "emotion": "assertive",
+            "cue": "pixels"
+        },
+        {
+            "id": 4,
+            "sequence": "0",
+            "character": "DIRECTOR",
+            "action": "",
+            "dialog": "Is that a go? Do I have a go?!",
+            "emotion": "anxious",
+            "cue": "go"
+        },
+        {
+            "id": 5,
+            "sequence": "0",
+            "character": "PRODUCER",
+            "action": "",
+            "dialog": "Hang on, hang on, what is ground truth, how do we know it's legit?!",
+            "emotion": "stressed",
+            "cue": "legit"
+        },
+        {
+            "id": 6,
+            "sequence": "1",
+            "character": "DIRECTOR",
+            "action": "",
+            "dialog": "Am I sending this out or not?",
+            "emotion": "determined",
+            "cue": "not"
+        },
+        {
+            "id": 7,
+            "sequence": "0",
+            "character": "PRODUCER",
+            "action": "",
+            "dialog": "Wait, just wait, we gotta - where did this footage come from?!",
+            "emotion": "urgent",
+            "cue": "from"
+        },
+        {
+            "id": 8,
+            "sequence": "1",
+            "character": "TECHNICIAN",
+            "action": "",
+            "dialog": "Half of it says U.S. Air Force!",
+            "emotion": "informative",
+            "cue": "force"
+        },
+        {
+            "id": 9,
+            "sequence": "0",
+            "character": "PRODUCER",
+            "action": "",
+            "dialog": "How do we confirm that?!",
+            "emotion": "questioning",
+            "cue": "that"
+        },
+        {
+            "id": 10,
+            "sequence": "1",
+            "character": "DIRECTOR",
+            "action": "(into headset)",
+            "dialog": "John -- fill air! Nobody knows what we're looking at up here!",
+            "emotion": "desperate",
+            "cue": "here"
+        },
+        {
+            "id": 11,
+            "sequence": "0",
+            "character": "PRODUCER",
+            "action": "",
+            "dialog": "Get the Pentagon press office on the phone!",
+            "emotion": "commanding",
+            "cue": "phone"
+        },
+        {
+            "id": 12,
+            "sequence": "1",
+            "character": "CO-DIRECTOR",
+            "action": "",
+            "dialog": "We don't have time for that!",
+            "emotion": "urgent",
+            "cue": "that"
+        },
+        {
+            "id": 13,
+            "sequence": "0",
+            "character": "PRODUCER",
+            "action": "",
+            "dialog": "I'm not making a move without a go-ahead from upstairs!",
+            "emotion": "assertive",
+            "cue": "upstairs"
+        }
+    ]
+}

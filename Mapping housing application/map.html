@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facility Finder Enhanced</title>
+    <style>
+      #map { height: 80vh; width: 100%; }
+      #input-area { margin: 10px; }
+      .color-legend {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+      .legend-color {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+        border-radius: 3px;
+        vertical-align: middle;
+      }
+      .remove-btn {
+        background: #f44;
+        border: none;
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 3px;
+        margin-left: 7px;
+        cursor: pointer;
+      }
+      .radius-slider {
+        width: 200px;
+        vertical-align: middle;
+      }
+    </style>
+    <script>
+      let map;
+      let service;
+      let currentCenter = { lat: 52.0907, lng: 5.1214 };
+      let circleRadius = 100; // default radius in meters
+      let showRadius = false;
+
+      // Color palette for up to 10 types
+      const typeColors = [
+        "#e74c3c", "#27ae60", "#2980b9", "#f39c12",
+        "#9b59b6", "#16a085", "#e67e22", "#34495e", "#2ecc71", "#d35400"
+      ];
+      let usedTypes = {}; // {type: {color, markers: [], circles: []}}
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: currentCenter,
+          zoom: 14,
+          scaleControl: true
+        });
+        service = new google.maps.places.PlacesService(map);
+        updateLegend();
+      }
+
+      function getTypeColor(type) {
+        if (usedTypes[type]) return usedTypes[type].color;
+        // Assign next unused color
+        const color = typeColors[Object.keys(usedTypes).length % typeColors.length];
+        usedTypes[type] = { color: color, markers: [], circles: [] };
+        return color;
+      }
+
+      function searchType() {
+        const type = document.getElementById("facility-type").value.trim();
+        if (!type) return;
+        if (usedTypes[type]) {
+          alert('Type already shown. Remove first to search again.');
+          return;
+        }
+        const color = getTypeColor(type);
+        let allResults = [];
+
+        function handleResults(results, status, pagination) {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            allResults = allResults.concat(results);
+            if (pagination && pagination.hasNextPage) {
+              setTimeout(() => pagination.nextPage(), 2000);
+            } else {
+              let typeMarkers = [];
+              let typeCircles = [];
+              for (let place of allResults) {
+                const marker = new google.maps.Marker({
+                  position: place.geometry.location,
+                  map: map,
+                  title: place.name,
+                  icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: color,
+                    fillOpacity: 1,
+                    strokeColor: "#222",
+                    strokeWeight: 1,
+                    scale: 7
+                  }
+                });
+                let circle = null;
+                if (showRadius) {
+                  circle = new google.maps.Circle({
+                    strokeColor: color,
+                    strokeOpacity: 0.5,
+                    strokeWeight: 1,
+                    fillColor: color,
+                    fillOpacity: 0.10,
+                    map: map,
+                    center: place.geometry.location,
+                    radius: circleRadius // Adjustable!
+                  });
+                }
+                typeMarkers.push(marker);
+                typeCircles.push(circle);
+              }
+              usedTypes[type].markers = typeMarkers;
+              usedTypes[type].circles = typeCircles;
+              updateLegend();
+            }
+          } else if (allResults.length === 0) {
+            alert('No places found or invalid type.');
+            delete usedTypes[type];
+            updateLegend();
+          }
+        }
+
+        const request = {
+          location: currentCenter,
+          radius: 5000,
+          type: type
+        };
+        service.nearbySearch(request, handleResults);
+      }
+
+      function updateLegend() {
+        const legendDiv = document.getElementById("type-legend");
+        legendDiv.innerHTML = '';
+        Object.entries(usedTypes).forEach(([type, data]) => {
+          const span = document.createElement('span');
+          span.innerHTML = `<span class="legend-color" style="background:${data.color}"></span>${type}
+            <button class="remove-btn" onclick="removeType('${type}')">x</button>`;
+          legendDiv.appendChild(span);
+          legendDiv.appendChild(document.createTextNode(' '));
+        });
+      }
+
+      function removeType(type) {
+        // Remove markers and circles
+        if (usedTypes[type]) {
+          usedTypes[type].markers.forEach(marker => marker.setMap(null));
+          usedTypes[type].circles.forEach(circle => { if (circle) circle.setMap(null); });
+          delete usedTypes[type];
+          updateLegend();
+        }
+      }
+
+      function changeCenter() {
+        const lat = parseFloat(document.getElementById("center-lat").value);
+        const lng = parseFloat(document.getElementById("center-lng").value);
+        if (isNaN(lat) || isNaN(lng)) {
+          alert('Enter valid numbers for latitude and longitude.');
+          return;
+        }
+        currentCenter = { lat, lng };
+        map.setCenter(currentCenter);
+        // Optionally clear types on move:
+        // Object.keys(usedTypes).forEach(removeType);
+      }
+
+      function updateRadiusDisplay() {
+        const val = document.getElementById('radius-slider').value;
+        document.getElementById('radius-value').textContent = (val >= 1000) ?
+          (val / 1000 + " km") : (val + " m");
+      }
+
+      function setRadius() {
+        circleRadius = parseInt(document.getElementById('radius-slider').value, 10);
+        updateRadiusDisplay();
+        // Update all displayed circles' radii
+        Object.entries(usedTypes).forEach(([type, data]) => {
+          data.circles.forEach(circle => {
+            if (circle) circle.setRadius(circleRadius);
+          });
+        });
+      }
+
+      function toggleRadius() {
+        showRadius = document.getElementById('show-radius').checked;
+        Object.entries(usedTypes).forEach(([type, data]) => {
+          // For each place, add/remove circle as needed
+          data.markers.forEach((marker, i) => {
+            let circle = data.circles[i];
+            if (showRadius) {
+              if (!circle) {
+                // Create and attach new circle
+                circle = new google.maps.Circle({
+                  strokeColor: data.color,
+                  strokeOpacity: 0.5,
+                  strokeWeight: 1,
+                  fillColor: data.color,
+                  fillOpacity: 0.10,
+                  map: map,
+                  center: marker.getPosition(),
+                  radius: circleRadius
+                });
+                data.circles[i] = circle;
+              } else {
+                circle.setMap(map);
+                circle.setRadius(circleRadius); // update in case radius changed
+              }
+            } else {
+              if (circle) circle.setMap(null);
+            }
+          });
+        });
+      }
+
+      window.removeType = removeType;
+    </script>
+  </head>
+  <body>
+    <div id="input-area">
+      <input id="facility-type" type="text" placeholder="e.g. hospital, supermarket, restaurant" />
+      <button onclick="searchType()">Search & Overlay</button>
+      <br><br>
+      <label>Center lat: <input id="center-lat" type="number" step="any" value="52.0907"></label>
+      <label>lng: <input id="center-lng" type="number" step="any" value="5.1214"></label>
+      <button onclick="changeCenter()">Change Center</button>
+      <br><br>
+      <label>
+        <input type="checkbox" id="show-radius" onchange="toggleRadius()">
+        Show Radius Around Each Marker
+      </label>
+      &nbsp;
+      <input type="range" min="100" max="5000" value="100" step="100" id="radius-slider" class="radius-slider" oninput="setRadius();">
+      <span id="radius-value">100 m</span>
+      <div class="color-legend" id="type-legend"></div>
+    </div>
+    <div id="map"></div>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAQWvCRWyXj8jmGk3c5aoZ8pKQUkXDvGQ&libraries=places&callback=initMap">
+    </script>
+    <script>
+      // Set initial display value for slider
+      updateRadiusDisplay();
+    </script>
+  </body>
+</html>

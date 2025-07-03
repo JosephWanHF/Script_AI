@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facility Finder Enhanced</title>
+    <style>
+      #map { height: 80vh; width: 100%; }
+      #input-area { margin: 10px; }
+      .color-legend {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+      .legend-color {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+        border-radius: 3px;
+        vertical-align: middle;
+      }
+      .remove-btn {
+        background: #f44;
+        border: none;
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 3px;
+        margin-left: 7px;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      let map;
+      let service;
+      let currentCenter = { lat: 52.0907, lng: 5.1214 };
+
+      // Color palette for up to 10 types
+      const typeColors = [
+        "#e74c3c", "#27ae60", "#2980b9", "#f39c12",
+        "#9b59b6", "#16a085", "#e67e22", "#34495e", "#2ecc71", "#d35400"
+      ];
+      let usedTypes = {}; // {type: {color, markers: []}}
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: currentCenter,
+          zoom: 14,
+        });
+        service = new google.maps.places.PlacesService(map);
+        updateLegend();
+      }
+
+      function getTypeColor(type) {
+        if (usedTypes[type]) return usedTypes[type].color;
+        // Assign next unused color
+        const color = typeColors[Object.keys(usedTypes).length % typeColors.length];
+        usedTypes[type] = { color: color, markers: [] };
+        return color;
+      }
+
+      // ====== UPDATED searchType() WITH PAGINATION =======
+      function searchType() {
+        const type = document.getElementById("facility-type").value.trim();
+        if (!type) return;
+        if (usedTypes[type]) {
+          alert('Type already shown. Remove first to search again.');
+          return;
+        }
+        const color = getTypeColor(type);
+        let allResults = [];
+
+        function handleResults(results, status, pagination) {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            allResults = allResults.concat(results);
+            if (pagination && pagination.hasNextPage) {
+              // Google requires a 2-second delay before requesting next page!
+              setTimeout(() => pagination.nextPage(), 2000);
+            } else {
+              // All results received, display markers:
+              let typeMarkers = [];
+              for (let place of allResults) {
+                const marker = new google.maps.Marker({
+                  position: place.geometry.location,
+                  map: map,
+                  title: place.name,
+                  icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: color,
+                    fillOpacity: 1,
+                    strokeColor: "#222",
+                    strokeWeight: 1,
+                    scale: 7
+                  }
+                });
+                typeMarkers.push(marker);
+              }
+              usedTypes[type].markers = typeMarkers;
+              updateLegend();
+            }
+          } else if (allResults.length === 0) {
+            alert('No places found or invalid type.');
+            delete usedTypes[type];
+            updateLegend();
+          }
+        }
+
+        const request = {
+          location: currentCenter,
+          radius: 5000, // 5km is a good practical search radius
+          type: type
+        };
+        service.nearbySearch(request, handleResults);
+      }
+
+      function updateLegend() {
+        const legendDiv = document.getElementById("type-legend");
+        legendDiv.innerHTML = '';
+        Object.entries(usedTypes).forEach(([type, data]) => {
+          const span = document.createElement('span');
+          span.innerHTML = `<span class="legend-color" style="background:${data.color}"></span>${type}
+            <button class="remove-btn" onclick="removeType('${type}')">x</button>`;
+          legendDiv.appendChild(span);
+          legendDiv.appendChild(document.createTextNode(' '));
+        });
+      }
+
+      function removeType(type) {
+        // Remove markers
+        if (usedTypes[type]) {
+          usedTypes[type].markers.forEach(marker => marker.setMap(null));
+          delete usedTypes[type];
+          updateLegend();
+        }
+      }
+
+      function changeCenter() {
+        // You can use either lat/lon or address (basic version here uses lat/lon)
+        const lat = parseFloat(document.getElementById("center-lat").value);
+        const lng = parseFloat(document.getElementById("center-lng").value);
+        if (isNaN(lat) || isNaN(lng)) {
+          alert('Enter valid numbers for latitude and longitude.');
+          return;
+        }
+        currentCenter = { lat, lng };
+        map.setCenter(currentCenter);
+        // Optionally, clear all types when center changes
+        // Object.keys(usedTypes).forEach(removeType);
+      }
+      // Expose removeType for onclick
+      window.removeType = removeType;
+    </script>
+  </head>
+  <body>
+    <div id="input-area">
+      <input id="facility-type" type="text" placeholder="e.g. hospital, supermarket, restaurant" />
+      <button onclick="searchType()">Search & Overlay</button>
+      <br><br>
+      <label>Center lat: <input id="center-lat" type="number" step="any" value="52.0907"></label>
+      <label>lng: <input id="center-lng" type="number" step="any" value="5.1214"></label>
+      <button onclick="changeCenter()">Change Center</button>
+      <div class="color-legend" id="type-legend"></div>
+    </div>
+    <div id="map"></div>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAQWvCRWyXj8jmGk3c5aoZ8pKQUkXDvGQ&libraries=places&callback=initMap">
+    </script>
+  </body>
+</html>

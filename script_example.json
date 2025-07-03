@@ -1,0 +1,401 @@
+[
+  {
+    "id": 1,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "Organ music plays. The stage is cleared and OTIS is rolled in laying in a coffin. ANNETTE and MARTHA approach the coffin together. BILLY JAKE waits in line behind them. MARTHA and ANNETTE bow their heads in prayer. After a brief moment, MARTHA breaks down crying."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 2,
+    "character": "MARTHA",
+    "dialog": "Oh, Otis!",
+    "actions": [],
+    "trigger": ""
+  },
+  {
+    "id": 3,
+    "character": "ANNETTE",
+    "dialog": "Alright, alright. Pull yourself together now!",
+    "actions": [],
+    "trigger": "now"
+  },
+  {
+    "id": 4,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "ANNETTE helps MARTHA exit as EMILE and LOUISE enter."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 5,
+    "character": "EMILE",
+    "dialog": "Wow. Heavy on the hysterics, huh?",
+    "actions": [],
+    "trigger": "hysterics"
+  },
+  {
+    "id": 6,
+    "character": "LOUISE",
+    "dialog": "It’s a funeral.",
+    "actions": [],
+    "trigger": "funeral"
+  },
+  {
+    "id": 7,
+    "character": "EMILE",
+    "dialog": "I don’t have to touch him, do I? I mean, he looked like hell when he was alive. But now, he looks like hell, you know?",
+    "actions": [
+      "Looking at the coffin.",
+      "Leaning in."
+    ],
+    "trigger": "know"
+  },
+  {
+    "id": 8,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "BILLY JAKE steps up to OTIS’s body and nods his head in prayer. LOUISE sees him and begins staring daggers into the back of his head."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 9,
+    "character": "EMILE",
+    "dialog": "Like is that what I’m gonna look like when I’m dead?",
+    "actions": [],
+    "trigger": "dead"
+  },
+  {
+    "id": 10,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "LOUISE doesn’t respond. She’s staring at BILLY JAKE who is praying with a smile. After a moment, EMILE finally sees him."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 11,
+    "character": "EMILE",
+    "dialog": "Hey. That guy praying over Ottie’s body. That’s Billy Jake, isn’t it?",
+    "actions": [],
+    "trigger": "it"
+  },
+  {
+    "id": 12,
+    "character": "LOUISE",
+    "dialog": "I hadn’t noticed.",
+    "actions": [],
+    "trigger": "noticed"
+  },
+  {
+    "id": 13,
+    "character": "EMILE",
+    "dialog": "What is he doing here?",
+    "actions": [],
+    "trigger": "here"
+  },
+  {
+    "id": 14,
+    "character": "LOUISE",
+    "dialog": "Same as everyone else, I imagine.",
+    "actions": [],
+    "trigger": "imagine"
+  },
+  {
+    "id": 15,
+    "character": "EMILE",
+    "dialog": "Hey, aren’t you supposed to kick his ass?",
+    "actions": [],
+    "trigger": "ass"
+  },
+  {
+    "id": 16,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "BILLY JAKE turns around, approaches EMILE and LOUISE."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 17,
+    "character": "EMILE",
+    "dialog": "He’s coming over. Now’s your chance.",
+    "actions": [],
+    "trigger": "chance"
+  },
+  {
+    "id": 18,
+    "character": "BILLY JAKE",
+    "dialog": "Louise. Good to see you. You look lovely as always.",
+    "actions": [],
+    "trigger": "always"
+  },
+  {
+    "id": 19,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "LOUISE stays silent."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 20,
+    "character": "BILLY JAKE",
+    "dialog": "You gonna stand there and not say nothin’ to your ol’ pal Billy Jake?",
+    "actions": [],
+    "trigger": "nothing"
+  },
+  {
+    "id": 21,
+    "character": "EMILE",
+    "dialog": "She’s supposed to kick your ass. It’s one of his last wishes.",
+    "actions": [],
+    "trigger": "wishes"
+  },
+  {
+    "id": 22,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "LOUISE hits EMILE."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 23,
+    "character": "EMILE",
+    "dialog": "Quit doing that!",
+    "actions": [],
+    "trigger": "that"
+  },
+  {
+    "id": 24,
+    "character": "BILLY JAKE",
+    "dialog": "Oh, I see. Yeah, that sounds about right. Well, slugger, you got it in you?",
+    "actions": [],
+    "trigger": "in you"
+  },
+  {
+    "id": 25,
+    "character": "LOUISE",
+    "dialog": "Leave us be.",
+    "actions": [],
+    "trigger": "be"
+  },
+  {
+    "id": 26,
+    "character": "BILLY JAKE",
+    "dialog": "Cold, Louise. That’s real cold. Maybe I’ll see you around, boy.",
+    "actions": [
+      "To EMILE, nodding."
+    ],
+    "trigger": "around"
+  },
+  {
+    "id": 27,
+    "character": "EMILE",
+    "dialog": "Don’t bet on it.",
+    "actions": [],
+    "trigger": "it"
+  },
+  {
+    "id": 28,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "BILLY JAKE exits."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 29,
+    "character": "EMILE",
+    "dialog": "Wow, Mom. You really missed a prime opportunity to –",
+    "actions": [],
+    "trigger": "opportunity to"
+  },
+  {
+    "id": 30,
+    "character": "LOUISE",
+    "dialog": "– Enough! For one second, for one tiny little moment, can you behave as if there are people here dealing with the loss of a loved one? Can you please at least pretend that, in spite of the way you feel, there may be someone here who has just lost the only big brother she’ll ever have? Can you do that for me, Emile?",
+    "actions": [],
+    "trigger": "for me"
+  },
+  {
+    "id": 31,
+    "character": "EMILE",
+    "dialog": "I’m sorry.",
+    "actions": [],
+    "trigger": "sorry"
+  },
+  {
+    "id": 32,
+    "character": "LOUISE",
+    "dialog": "Just pretend.",
+    "actions": [],
+    "trigger": "pretend"
+  },
+  {
+    "id": 33,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "LOUISE approaches OTIS’s body."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 34,
+    "character": "EMILE",
+    "dialog": "I’m not sure that I can.",
+    "actions": [],
+    "trigger": "can"
+  },
+  {
+    "id": 35,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "LOUISE murmurs a prayer then kisses OTIS’s forehead. She exits a different direction than Billy Jake. Seeing it’s his turn, EMILE approaches OTIS. He looks around a bit unsure of what to do with his body. He decides on nodding his head and praying."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 36,
+    "character": "EMILE",
+    "dialog": "Uh… hey. Ottie. It’s been a minute. You look like… well, the makeup’s good, I guess. Whatever. Anyway, look. About this list of yours. I’m flattered, I guess. In a stupid way, sure. But flattered nonetheless. Thing is… I don’t owe you anything.",
+    "actions": [],
+    "trigger": "anything"
+  },
+  {
+    "id": 37,
+    "character": "STAGE",
+    "dialog": "OTIS begins to rise from his coffin.",
+    "actions": [],
+    "trigger": "coffin"
+  },
+  {
+    "id": 38,
+    "character": "EMILE",
+    "dialog": "Your death doesn’t change that. I mean, maybe I’m sad that you died and all. But I want you to know that I’ve thought about it. I really have. And I’m just not doing it. No hard feelings, eh?",
+    "actions": [],
+    "trigger": "feelings"
+  },
+  {
+    "id": 39,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "EMILE opens his eyes and sees OTIS sitting up, staring at him."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 40,
+    "character": "EMILE",
+    "dialog": "Uh… what?",
+    "actions": [],
+    "trigger": "what"
+  },
+  {
+    "id": 41,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "OTIS grabs EMILE’s throat with one hand. He begins choking him."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 42,
+    "character": "OTIS",
+    "dialog": "What you just say to me, boy?",
+    "actions": [],
+    "trigger": "me"
+  },
+  {
+    "id": 43,
+    "character": "EMILE",
+    "dialog": "This… seems improbable.",
+    "actions": [
+      "Choking."
+    ],
+    "trigger": "improbable"
+  },
+  {
+    "id": 44,
+    "character": "STAGE",
+    "dialog": "",
+    "actions": [
+      "OTIS punches EMILE twice before finishing with one good one. EMILE crashes to the ground. OTIS gets out of his coffin."
+    ],
+    "trigger": ""
+  },
+  {
+    "id": 45,
+    "character": "OTIS",
+    "dialog": "How’s that for improbable? I bet you didn’t know Catholics believe in ghosts. Actually, I’m not so sure they do, myself.",
+    "actions": [
+      "Slowly approaching EMILE."
+    ],
+    "trigger": "myself"
+  },
+  {
+    "id": 46,
+    "character": "EMILE",
+    "dialog": "You’re dead.",
+    "actions": [],
+    "trigger": "dead"
+  },
+  {
+    "id": 47,
+    "character": "OTIS",
+    "dialog": "Yes, that does seem to be the case. So?",
+    "actions": [],
+    "trigger": "So"
+  },
+  {
+    "id": 48,
+    "character": "EMILE",
+    "dialog": "So get back in your coffin!",
+    "actions": [],
+    "trigger": "coffin"
+  },
+  {
+    "id": 49,
+    "character": "OTIS",
+    "dialog": "Or what? What are you gonna do, kick my ass?",
+    "actions": [],
+    "trigger": "ass"
+  },
+  {
+    "id": 50,
+    "character": "EMILE",
+    "dialog": "…yes?",
+    "actions": [],
+    "trigger": "yes"
+  },
+  {
+    "id": 51,
+    "character": "OTIS",
+    "dialog": "Alright, nephew. Give it a shot.",
+    "actions": [],
+    "trigger": "shot"
+  },
+  {
+    "id": 52,
+    "character": "STAGE",
+    "dialog": "EMILE stands up. He punches OTIS. OTIS is unfazed. EMILE tries again. This time, OTIS catches his fist and punches him in the gut. EMILE buckles to the floor.",
+    "actions": [],
+    "trigger": ""
+  }
+]
